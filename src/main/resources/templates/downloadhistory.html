@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Download History</title>
+</head>
+<body>
+<h1>Download History</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Document Name</th>
+        <th>Size</th>
+        <th>Download Time</th>
+        <th>Project Name</th>
+        <th>Role Name</th>
+        <th>Username</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="document : ${documents}">
+        <td th:text="${document.name}"></td>
+        <td th:text="${#numbers.formatInteger(document.size, 4, 'COMMA')}"></td>
+        <td th:text="${document.uploadTime}"></td>
+        <td th:text="${document.project.projectName}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

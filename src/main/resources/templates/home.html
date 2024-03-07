@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>File Drive</title>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"
+          th:href="@{/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container-fluid text-center">
+    <div>
+        <h1>Document Manager</h1>
+    </div>
+
+    <div class="text-success">
+        <h3 th:text="${message}"></h3>
+    </div>
+
+    <div class="row border rounded m-3 p-3">
+        <th:block th:each="doc: ${documentList}">
+            <div class="col">
+                <div>
+                    <img th:src="@{/images/images.png}" width="50" alt="">
+                </div>
+                <div>
+                    <a th:href="@{/download(id=${doc.id})}">
+                        <span th:text="${doc.name}"></span>
+                    </a>
+                </div>
+                <div>
+                    (<span th:text="${#numbers.formatInteger(doc.size , 4, 'COMMA')}"></span> bytes)
+                </div>
+            </div>
+        </th:block>
+    </div>
+
+    <form th:action="@{/upload}" method="post" enctype="multipart/form-data" style="max-width: 600px; margin: 0 auto">
+        <div class="border rounded m-3">
+            <h2>Upload Your Files: </h2>
+            <p>
+                <input type="file" name="document" required>
+            </p>
+            <input type="hidden" name="projectId" value="1">
+            <p>
+                <input type="submit" value="Upload" class="btn btn-primary">
+            </p>
+        </div>
+    </form>
+</div>
+</body>
+</html>
